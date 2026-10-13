@@ -4,12 +4,12 @@ Landing page da **Cellva Ingredients** para captação de leads. Visitantes conh
 
 - **Site:** HTML, CSS e JavaScript puros (sem framework nem etapa de build)
 - **Formulário:** Google Apps Script (sem servidor próprio)
-- **Hospedagem:** GoDaddy
+- **Hospedagem:** GitHub Pages, em https://register.cellva.com (domínio na GoDaddy)
 
 ## Como funciona
 
 ```
-Visitante preenche o formulário (site na GoDaddy)
+Visitante preenche o formulário (site no GitHub Pages)
                   ↓
    Google Apps Script (conta Cellva)
           ↓                 ↓
@@ -21,7 +21,7 @@ O script valida os campos, ignora robôs (campo invisível "honeypot") e limita 
 ## Estrutura
 
 ```
-frontend/                 → o site (é só esta pasta que vai para a hospedagem)
+docs/                     → o site (pasta publicada pelo GitHub Pages)
 ├── index.html
 └── assets/
     ├── css/style.css     → estilos e cores da marca
@@ -36,19 +36,23 @@ apps-script/
 ## Rodar localmente
 
 ```bash
-cd frontend
+cd docs
 python3 -m http.server 8000
 ```
 
 Acesse http://localhost:8000. O formulário funciona localmente e envia leads de verdade.
 
-## Publicar na GoDaddy
+## Publicação (GitHub Pages)
 
-Envie o **conteúdo** da pasta `frontend/` (o `index.html` e a pasta `assets`) para a pasta pública do site (`public_html` no cPanel / Gerenciador de Arquivos).
+O GitHub Pages publica automaticamente a pasta `docs/` da branch `main`. Cada push na `main` atualiza o site em 1 a 2 minutos (acompanhe na aba **Actions**).
+
+- **Configuração:** Settings → Pages → Source: *Deploy from a branch* → `main` / `/docs`
+- **Domínio:** `register.cellva.com`, por um registro CNAME na GoDaddy apontando para `cellva-ingredients.github.io`. O arquivo `docs/CNAME` guarda esse domínio e não deve ser apagado.
+- **Fluxo:** desenvolva na `dev` e leve para a `main` quando estiver pronto para publicar.
 
 ## Formulário (Google Apps Script)
 
-O script já está publicado. A URL fica em `frontend/assets/js/main.js` (constante `API_URL`).
+O script já está publicado. A URL fica em `docs/assets/js/main.js` (constante `API_URL`).
 
 **Alterar o script** (por exemplo, para trocar o e-mail de destino em `EMAIL_DESTINO`):
 1. Edite o código no editor do Apps Script (planilha de leads > **Extensões > Apps Script**) e mantenha `apps-script/Code.gs` igual.
@@ -65,7 +69,7 @@ O script já está publicado. A URL fica em `frontend/assets/js/main.js` (consta
 4. **Implantar > Nova implantação > App da Web**:
    - Executar como: **Eu**
    - Quem pode acessar: **Qualquer pessoa** (não "Qualquer pessoa na Cellva")
-5. Copie a URL terminada em `/exec` e coloque em `API_URL`, no `frontend/assets/js/main.js`.
+5. Copie a URL terminada em `/exec` e coloque em `API_URL`, no `docs/assets/js/main.js`.
    Use o formato `https://script.google.com/macros/s/.../exec` (sem `/a/macros/cellva.com/`).
 
 </details>
@@ -74,7 +78,7 @@ O script já está publicado. A URL fica em `frontend/assets/js/main.js` (consta
 
 A página está em **inglês (padrão)**, **português** e **alemão**. O seletor fica no canto superior direito, e a escolha do visitante fica salva no navegador.
 
-- **Editar um texto:** altere em `frontend/assets/js/i18n.js`, nos três idiomas. No HTML, cada texto traduzível tem um atributo `data-i18n="chave"`.
+- **Editar um texto:** altere em `docs/assets/js/i18n.js`, nos três idiomas. No HTML, cada texto traduzível tem um atributo `data-i18n="chave"`.
 - **Novo texto na página:** coloque `data-i18n="nova.chave"` no elemento e adicione a chave em `en`, `pt` e `de`.
 - **Leads:** o segmento chega sempre em português no e-mail e na planilha, qualquer que seja o idioma do visitante.
 
@@ -91,7 +95,7 @@ Segue o [Brandcenter da Cellva](https://cba.frontify.com/d/8J4fc4g91SS2/identida
 | Musgo | `#56682b` | detalhes |
 | Azul Claro | `#227773` | hover e foco |
 
-- **Fontes:** Rethink Sans (Google Fonts) nos textos. A fonte de títulos da marca, **Pastiche Grotesk**, é licenciada. Para ativá-la, coloque `PasticheGrotesk-Bold.woff2` e `PasticheGrotesk-Medium.woff2` em `frontend/assets/fonts/`. Até lá, os títulos usam Rethink Sans.
+- **Fontes:** Rethink Sans (Google Fonts) nos textos. A fonte de títulos da marca, **Pastiche Grotesk**, é licenciada. Para ativá-la, coloque `PasticheGrotesk-Bold.woff2` e `PasticheGrotesk-Medium.woff2` em `docs/assets/fonts/`. Até lá, os títulos usam Rethink Sans.
 - **Logo:** assinatura principal (verde) no topo e secundária (amarela) no rodapé, com 160 px de largura (mínimo da marca: 150 px).
 
 ## Branches
