@@ -1,0 +1,311 @@
+/* Identidade visual Cellva (Brandcenter Frontify) */
+
+/* Pastiche Grotesk (fonte de títulos da marca) é licenciada.
+   Coloque os arquivos .woff2 em assets/fonts/ para ativá-la; até lá, os títulos usam Rethink Sans. */
+@font-face {
+  font-family: "Pastiche Grotesk";
+  src: url("../fonts/PasticheGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pastiche Grotesk";
+  src: url("../fonts/PasticheGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  /* Cores principais */
+  --verde: #143a33;
+  --amarelo: #fac940;
+  /* Cores secundárias (base neutra) */
+  --offwhite: #f2f2e9;
+  --cinza-claro: #d7dbca;
+  /* Cores terciárias */
+  --marrom: #a86727;
+  --musgo: #56682b;
+  --azul-claro: #227773;
+
+  --text: var(--verde);
+  --muted: #4a5d57;
+  --white: #ffffff;
+  --error: #b3261e;
+  --success: var(--musgo);
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(20, 58, 51, 0.08);
+  --font-title: "Pastiche Grotesk", "Rethink Sans", system-ui, sans-serif;
+  --font-body: "Rethink Sans", system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--offwhite);
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  padding: 0.85em 1.5em;
+  border: 2px solid var(--verde);
+  border-radius: 999px;
+  background: var(--verde);
+  color: var(--offwhite);
+  font: 600 1rem var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.btn:hover { background: var(--azul-claro); border-color: var(--azul-claro); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+.btn-amarelo { background: var(--amarelo); border-color: var(--amarelo); color: var(--verde); font-weight: 700; }
+.btn-amarelo:hover { background: #f0bb22; border-color: #f0bb22; }
+/* Brilho amarelo suave nas laterais, pulsando devagar */
+.btn-brilho {
+  padding: 1.05em 2.4em;
+  font-size: 1.2rem;
+  box-shadow: -10px 0 22px -6px rgba(250, 201, 64, 0.55), 10px 0 22px -6px rgba(250, 201, 64, 0.55);
+  animation: brilho 2.8s ease-in-out infinite;
+}
+.btn-brilho:hover { animation-play-state: paused; }
+@keyframes brilho {
+  0%, 100% { box-shadow: -10px 0 22px -6px rgba(250, 201, 64, 0.45), 10px 0 22px -6px rgba(250, 201, 64, 0.45); }
+  50% { box-shadow: -16px 0 30px -4px rgba(250, 201, 64, 0.8), 16px 0 30px -4px rgba(250, 201, 64, 0.8); }
+}
+.btn-small { padding: 0.5em 1.1em; font-size: 0.9rem; }
+.btn-full { width: 100%; }
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(242, 242, 233, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--cinza-claro);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 76px;
+}
+/* Assinatura: mínimo de 150px de largura (redução máxima da marca) */
+.logo img { width: 160px; height: auto; }
+.nav { display: flex; align-items: center; gap: 1.5rem; }
+.nav a:not(.btn) { text-decoration: none; color: var(--verde); font-weight: 500; }
+.nav a:not(.btn):hover { color: var(--azul-claro); }
+
+/* Hero */
+.hero { position: relative; padding: 80px 0 96px; overflow: hidden; }
+/* Foto de fundo meio transparente atrás do título */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/hero-cafe.jpg") center right / cover no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+/* Clareia o lado do texto para manter a leitura */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(242, 242, 233, 0.88) 0%, rgba(242, 242, 233, 0.62) 45%, rgba(242, 242, 233, 0) 75%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; }
+
+.hero-text { max-width: 900px; }
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--musgo);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+/* Título sempre em uma linha: o tamanho acompanha a largura da tela */
+.hero h1 { font-size: clamp(1.4rem, 6.8vw, 4rem); white-space: nowrap; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 34em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2rem; }
+
+/* Seções */
+.section { padding: 88px 0; }
+.section-alt { background: var(--cinza-claro); }
+.section-title { font-size: clamp(1.9rem, 3.5vw, 2.6rem); text-align: center; margin-bottom: 48px; }
+
+.cards, .segments {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.card, .segment {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.card-icon { height: 44px; width: auto; margin-bottom: 18px; }
+.card h3 { font-size: 1.35rem; }
+.card p, .segment p { margin: 0; color: var(--muted); }
+.segment-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 0.3em 0.9em;
+  border-radius: 999px;
+  background: var(--amarelo);
+  color: var(--verde);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+.steps li {
+  counter-increment: step;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: var(--amarelo);
+  font: 700 1.2rem var(--font-title);
+}
+.steps strong { font-size: 1.1rem; }
+.steps span { color: var(--muted); }
+
+/* Contato */
+.section-contact { background: var(--verde); color: var(--offwhite); }
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  align-items: start;
+}
+.contact-text h2 { font-size: clamp(2rem, 4vw, 2.8rem); color: var(--amarelo); }
+.contact-text p { color: var(--cinza-claro); font-size: 1.1rem; }
+
+.form {
+  background: var(--offwhite);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; flex: 1; min-width: 0; }
+.field-row { display: flex; gap: 16px; }
+.field label { font-weight: 500; font-size: 0.95rem; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 0.75em 0.9em;
+  border: 1.5px solid var(--cinza-claro);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  font: 1rem var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field textarea { resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 3px rgba(34, 119, 115, 0.18);
+}
+.field.invalid input, .field.invalid select { border-color: var(--error); }
+
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.consent input { margin-top: 0.3em; accent-color: var(--verde); }
+.consent.invalid span { color: var(--error); }
+
+
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-status { margin: 14px 0 0; min-height: 1.5em; font-weight: 500; }
+.form-status.success { color: var(--success); }
+.form-status.error { color: var(--error); }
+
+/* Footer */
+.site-footer {
+  padding: 40px 0;
+  background: var(--verde);
+  border-top: 1px solid rgba(242, 242, 233, 0.12);
+  color: var(--cinza-claro);
+  font-size: 0.9rem;
+}
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; }
+.footer-logo { width: 160px; height: auto; }
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { color: var(--amarelo); }
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .contact-inner { grid-template-columns: 1fr; }
+  .cards, .segments, .steps { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .nav a:not(.btn) { display: none; }
+  .hero { padding: 48px 0 64px; }
+  .hero::after { background: rgba(242, 242, 233, 0.72); }
+  .section { padding: 64px 0; }
+  .field-row { flex-direction: column; gap: 0; }
+  .form { padding: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
