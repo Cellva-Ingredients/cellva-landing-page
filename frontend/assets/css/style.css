@@ -125,6 +125,23 @@ h1, h2, h3 {
 .nav a:not(.btn) { text-decoration: none; color: var(--verde); font-weight: 500; }
 .nav a:not(.btn):hover { color: var(--azul-claro); }
 
+/* Seletor de idioma: canto superior direito */
+.header-right { display: flex; align-items: center; gap: 1.25rem; }
+.lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.45em 2em 0.45em 0.85em;
+  border: 1.5px solid var(--verde);
+  border-radius: 999px;
+  background: var(--offwhite) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23143a33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0.8em center;
+  color: var(--verde);
+  font: 600 0.9rem var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lang-select:hover { border-color: var(--azul-claro); }
+.lang-select:focus-visible { outline: none; border-color: var(--azul-claro); box-shadow: 0 0 0 3px rgba(34, 119, 115, 0.18); }
+
 /* Hero */
 .hero { position: relative; padding: 80px 0 96px; overflow: hidden; }
 /* Foto de fundo meio transparente atrás do título */
@@ -146,7 +163,7 @@ h1, h2, h3 {
 }
 .hero-inner { position: relative; z-index: 2; }
 
-.hero-text { max-width: 900px; }
+.hero-text { max-width: 960px; }
 .eyebrow {
   margin: 0 0 1rem;
   color: var(--musgo);
@@ -154,9 +171,23 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Detalhes amarelos para guiar o olhar */
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--amarelo);
+  flex-shrink: 0;
 }
 /* Título sempre em uma linha: o tamanho acompanha a largura da tela */
-.hero h1 { font-size: clamp(1.4rem, 6.8vw, 4rem); white-space: nowrap; }
+.hero h1 { font-size: clamp(1rem, 6.6vw, 4rem); white-space: nowrap; }
+/* Título em alemão é mais longo: letra um pouco menor para continuar em uma linha */
+html[lang="de"] .hero h1 { font-size: clamp(1rem, 5.9vw, 3.8rem); }
 .lead { font-size: 1.15rem; color: var(--muted); max-width: 34em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2rem; }
 
@@ -164,6 +195,15 @@ h1, h2, h3 {
 .section { padding: 88px 0; }
 .section-alt { background: var(--cinza-claro); }
 .section-title { font-size: clamp(1.9rem, 3.5vw, 2.6rem); text-align: center; margin-bottom: 48px; }
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 5px;
+  margin: 16px auto 0;
+  border-radius: 3px;
+  background: var(--amarelo);
+}
 
 .cards, .segments {
   display: grid;
@@ -175,8 +215,22 @@ h1, h2, h3 {
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow);
+  border-top: 4px solid var(--amarelo);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.card-icon { height: 44px; width: auto; margin-bottom: 18px; }
+.card:hover, .segment:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(20, 58, 51, 0.12), 0 0 0 1px rgba(250, 201, 64, 0.5);
+}
+.card-icon {
+  height: 64px;
+  width: 64px;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: rgba(250, 201, 64, 0.28);
+  object-fit: contain;
+}
 .card h3 { font-size: 1.35rem; }
 .card p, .segment p { margin: 0; color: var(--muted); }
 .segment-tag {
@@ -216,12 +270,19 @@ h1, h2, h3 {
   background: var(--verde);
   color: var(--amarelo);
   font: 700 1.2rem var(--font-title);
+  box-shadow: 0 0 0 5px rgba(250, 201, 64, 0.35);
 }
 .steps strong { font-size: 1.1rem; }
 .steps span { color: var(--muted); }
 
 /* Contato */
-.section-contact { background: var(--verde); color: var(--offwhite); }
+.section-contact {
+  background:
+    radial-gradient(circle at 8% 15%, rgba(250, 201, 64, 0.16), transparent 38%),
+    radial-gradient(circle at 95% 95%, rgba(250, 201, 64, 0.1), transparent 35%),
+    var(--verde);
+  color: var(--offwhite);
+}
 .contact-inner {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
@@ -298,6 +359,7 @@ h1, h2, h3 {
 
 @media (max-width: 640px) {
   .nav a:not(.btn) { display: none; }
+  .header-right { gap: 0.75rem; }
   .hero { padding: 48px 0 64px; }
   .hero::after { background: rgba(242, 242, 233, 0.72); }
   .section { padding: 64px 0; }
@@ -308,4 +370,9 @@ h1, h2, h3 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
+}
+
+/* Celular estreito: logo + idioma no cabeçalho; o botão de contato continua logo abaixo, no topo da página */
+@media (max-width: 520px) {
+  .nav { display: none; }
 }

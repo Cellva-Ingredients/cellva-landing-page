@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cellva Ingredients | Extrato de polpa de café</title>
-  <meta name="description" content="Extrato de polpa de café da Cellva: ingrediente para cafeterias, coquetelaria e açaiterias. Solicite amostras e condições comerciais.">
+  <title>Cellva Ingredients | Coffee Fruit Extract</title>
+  <meta name="description" content="Cellva coffee fruit extract: an ingredient for coffee shops, cocktail bars and açaí shops. Request samples and commercial terms.">
   <meta name="theme-color" content="#143a33">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,17 +13,25 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  <!-- Textos em inglês (idioma padrão). As traduções ficam em assets/js/i18n.js -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="#topo" class="logo">
         <img src="assets/img/logo-cellva.png" alt="Cellva Ingredients" width="160" height="50">
       </a>
-      <nav class="nav" aria-label="Principal">
-        <a href="#produto">Produto</a>
-        <a href="#aplicacoes">Aplicações</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#contato" class="btn btn-small">Fale com a gente</a>
-      </nav>
+      <div class="header-right">
+        <nav class="nav" aria-label="Main">
+          <a href="#produto" data-i18n="nav.produto">Product</a>
+          <a href="#aplicacoes" data-i18n="nav.aplicacoes">Applications</a>
+          <a href="#como-funciona" data-i18n="nav.como">How it works</a>
+          <a href="#contato" class="btn btn-small" data-i18n="nav.contato">Talk to us</a>
+        </nav>
+        <select id="idioma" class="lang-select" aria-label="Language" data-i18n-aria-label="lang.label">
+          <option value="en">🇬🇧 EN</option>
+          <option value="pt">🇧🇷 PT</option>
+          <option value="de">🇩🇪 DE</option>
+        </select>
+      </div>
     </div>
   </header>
 
@@ -32,15 +40,14 @@
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-text">
-          <p class="eyebrow">Ingrediente icônico para sua indústria </p>
-          <h1>Sabor. Função. Desempenho.</h1>
+          <p class="eyebrow" data-i18n="hero.eyebrow">An iconic ingredient for your industry</p>
+          <h1 data-i18n="hero.title">Flavor. Function. Performance.</h1>
 
-          <p class="lead">
-            Transformamos a polpa do café, parte que costuma ser descartada na produção,
-            em um extrato versátil para bebidas, drinks e sobremesas.
+          <p class="lead" data-i18n="hero.lead">
+            We transform coffee fruit pulp, a part usually discarded during production, into a versatile extract for beverages, cocktails and desserts.
           </p>
           <div class="hero-actions">
-            <a href="#contato" class="btn btn-amarelo btn-brilho">Entre em contato</a>
+            <a href="#contato" class="btn btn-amarelo btn-brilho" data-i18n="hero.cta">Get in touch</a>
           </div>
         </div>
       </div>
@@ -49,22 +56,22 @@
     <!-- Produto -->
     <section id="produto" class="section">
       <div class="container">
-        <h2 class="section-title">Do resíduo ao ingrediente</h2>
+        <h2 class="section-title" data-i18n="produto.title">From by-product to ingredient</h2>
         <div class="cards">
           <article class="card">
             <img src="assets/img/icones/gota.svg" alt="" class="card-icon">
-            <h3>Sabor diferente</h3>
-            <p>Notas frutadas e levemente adocicadas, bem diferentes do café torrado: uma assinatura nova para o cardápio.</p>
+            <h3 data-i18n="card1.title">A different flavor</h3>
+            <p data-i18n="card1.text">Fruity, slightly sweet notes, very different from roasted coffee: a new signature for your menu.</p>
           </article>
           <article class="card">
             <img src="assets/img/icones/ideia.svg" alt="" class="card-icon">
-            <h3>Fácil de aplicar</h3>
-            <p>Entra em bebidas quentes e geladas, drinks, xaropes e sobremesas, sem mudar a rotina de preparo.</p>
+            <h3 data-i18n="card2.title">Easy to use</h3>
+            <p data-i18n="card2.text">Works in hot and cold beverages, cocktails, syrups and desserts, without changing your preparation routine.</p>
           </article>
           <article class="card">
             <img src="assets/img/icones/transformacao.svg" alt="" class="card-icon">
-            <h3>Aproveitamento integral</h3>
-            <p>Feito a partir da polpa do fruto do café, um subproduto da produção. Uma boa história para contar ao seu cliente.</p>
+            <h3 data-i18n="card3.title">Whole-fruit use</h3>
+            <p data-i18n="card3.text">Made from the pulp of the coffee fruit, a by-product of coffee production. A great story to tell your customers.</p>
           </article>
         </div>
       </div>
@@ -73,19 +80,19 @@
     <!-- Aplicações -->
     <section id="aplicacoes" class="section section-alt">
       <div class="container">
-        <h2 class="section-title">Para quem é</h2>
+        <h2 class="section-title" data-i18n="apps.title">Who it's for</h2>
         <div class="segments">
           <article class="segment">
-            <span class="segment-tag">Cafeterias</span>
-            <p>Bebidas autorais, cold brews frutados, sodas e lattes com um ingrediente que conversa com o café.</p>
+            <span class="segment-tag" data-i18n="seg1.tag">Coffee shops</span>
+            <p data-i18n="seg1.text">Signature drinks, fruity cold brews, sodas and lattes with an ingredient that speaks the language of coffee.</p>
           </article>
           <article class="segment">
-            <span class="segment-tag">Coquetelaria</span>
-            <p>Xaropes, infusões e drinks, com e sem álcool, que surpreendem e ajudam a contar uma história no balcão.</p>
+            <span class="segment-tag" data-i18n="seg2.tag">Mixology</span>
+            <p data-i18n="seg2.text">Syrups, infusions and drinks, with or without alcohol, that surprise guests and help tell a story at the bar.</p>
           </article>
           <article class="segment">
-            <span class="segment-tag">Açaiterias e sorveterias</span>
-            <p>Combinações e coberturas com sabor novo para diferenciar o copo e o cardápio.</p>
+            <span class="segment-tag" data-i18n="seg3.tag">Açaí and ice cream shops</span>
+            <p data-i18n="seg3.text">New combinations and toppings to set your cup and your menu apart.</p>
           </article>
         </div>
       </div>
@@ -94,11 +101,11 @@
     <!-- Como funciona -->
     <section id="como-funciona" class="section">
       <div class="container">
-        <h2 class="section-title">Como funciona</h2>
+        <h2 class="section-title" data-i18n="how.title">How it works</h2>
         <ol class="steps">
-          <li><strong>Você conta sobre o seu negócio</strong><span>Pelo formulário abaixo, em menos de um minuto.</span></li>
-          <li><strong>Nós entramos em contato</strong><span>Para entender o seu cardápio e o seu volume.</span></li>
-          <li><strong>Você testa com uma amostra</strong><span>E experimenta o ingrediente nas suas receitas antes de decidir.</span></li>
+          <li><strong data-i18n="step1.title">You tell us about your business</strong><span data-i18n="step1.text">Using the form below, in less than a minute.</span></li>
+          <li><strong data-i18n="step2.title">We get in touch</strong><span data-i18n="step2.text">To understand your menu and your volume.</span></li>
+          <li><strong data-i18n="step3.title">You test a sample</strong><span data-i18n="step3.text">And try the ingredient in your own recipes before deciding.</span></li>
         </ol>
       </div>
     </section>
@@ -107,51 +114,52 @@
     <section id="contato" class="section section-contact">
       <div class="container contact-inner">
         <div class="contact-text">
-          <h2>Vamos conversar?</h2>
-          <p>Deixe seus dados e retornamos para falar sobre amostras, preços e condições.</p>
+          <h2 data-i18n="contact.title">Let's talk</h2>
+          <p data-i18n="contact.text">Leave your details and we'll get back to you about samples, pricing and terms.</p>
         </div>
 
         <form id="lead-form" class="form" novalidate>
           <div class="field">
-            <label for="nome">Nome *</label>
+            <label for="nome" data-i18n="form.nome">Name *</label>
             <input id="nome" name="nome" type="text" autocomplete="name" required maxlength="120">
           </div>
           <div class="field">
-            <label for="empresa">Empresa / estabelecimento *</label>
+            <label for="empresa" data-i18n="form.empresa">Company / business *</label>
             <input id="empresa" name="empresa" type="text" autocomplete="organization" required maxlength="160">
           </div>
           <div class="field-row">
             <div class="field">
-              <label for="email">E-mail *</label>
+              <label for="email" data-i18n="form.email">Email *</label>
               <input id="email" name="email" type="email" autocomplete="email" required maxlength="160">
             </div>
             <div class="field">
-              <label for="telefone">WhatsApp / telefone *</label>
-              <input id="telefone" name="telefone" type="tel" autocomplete="tel" required maxlength="30" placeholder="(11) 90000-0000">
+              <label for="telefone" data-i18n="form.telefone">WhatsApp / phone *</label>
+              <input id="telefone" name="telefone" type="tel" autocomplete="tel" required maxlength="30" placeholder="+1 555 000 0000" data-i18n-placeholder="form.telefone.ph">
             </div>
           </div>
           <div class="field-row">
             <div class="field">
-              <label for="segmento">Segmento *</label>
+              <label for="segmento" data-i18n="form.segmento">Industry *</label>
+              <!-- Os valores (value) ficam em português para os leads chegarem padronizados no e-mail e na planilha -->
               <select id="segmento" name="segmento" required>
-                <option value="">Selecione</option>
-                <option>Cafeteria</option>
-                <option>Coquetelaria / bar</option>
-                <option>Açaiteria / sorveteria</option>
-                <option>Restaurante</option>
-                <option>Indústria de alimentos e bebidas</option>
-                <option>Distribuidor</option>
-                <option>Outro</option>
+                <option value="" data-i18n="form.seg.selecione">Select</option>
+                <option value="Cafeteria" data-i18n="form.seg.cafeteria">Coffee shop</option>
+                <option value="Coquetelaria / bar" data-i18n="form.seg.bar">Cocktail bar</option>
+                <option value="Açaiteria / sorveteria" data-i18n="form.seg.acai">Açaí / ice cream shop</option>
+                <option value="Restaurante" data-i18n="form.seg.restaurante">Restaurant</option>
+                <option value="Indústria de alimentos e bebidas" data-i18n="form.seg.industria">Food &amp; beverage industry</option>
+                <option value="Distribuidor" data-i18n="form.seg.distribuidor">Distributor</option>
+                <option value="Outro" data-i18n="form.seg.outro">Other</option>
               </select>
             </div>
             <div class="field">
-              <label for="cidade">Cidade / UF</label>
+              <label for="cidade" data-i18n="form.cidade">City / Country</label>
               <input id="cidade" name="cidade" type="text" autocomplete="address-level2" maxlength="80">
             </div>
           </div>
           <div class="field">
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="4" maxlength="2000" placeholder="Conte um pouco sobre o seu negócio ou o que você gostaria de criar."></textarea>
+            <label for="mensagem" data-i18n="form.mensagem">Message</label>
+            <textarea id="mensagem" name="mensagem" rows="4" maxlength="2000" placeholder="Tell us a little about your business or what you'd like to create." data-i18n-placeholder="form.mensagem.ph"></textarea>
           </div>
 
           <!-- Anti-spam: campo invisível que pessoas não preenchem -->
@@ -162,10 +170,10 @@
 
           <label class="consent">
             <input type="checkbox" name="consentimento" required>
-            <span>Autorizo a Cellva a usar meus dados para entrar em contato sobre este pedido. *</span>
+            <span data-i18n="form.consent">I authorize Cellva to use my data to contact me about this request. *</span>
           </label>
 
-          <button type="submit" class="btn btn-amarelo btn-full">Enviar</button>
+          <button type="submit" class="btn btn-amarelo btn-full" data-i18n="form.enviar">Send</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -176,10 +184,11 @@
     <div class="container footer-inner">
       <img src="assets/img/logo-cellva-amarelo.png" alt="Cellva Ingredients" width="160" height="50" class="footer-logo">
       <span>© <span id="ano"></span> Cellva Ingredients</span>
-      <a href="#topo">Voltar ao topo</a>
+      <a href="#topo" data-i18n="footer.topo">Back to top</a>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

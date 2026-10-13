@@ -7,10 +7,19 @@ const form = document.getElementById("lead-form");
 const statusEl = form.querySelector(".form-status");
 const submitBtn = form.querySelector('button[type="submit"]');
 
-function setStatus(message, type) {
-  statusEl.textContent = message;
+// Guarda a chave da mensagem para retraduzir se o visitante trocar de idioma
+let statusAtual = null;
+
+function setStatus(chave, type, textoLivre) {
+  statusAtual = chave || textoLivre ? { chave, type, textoLivre } : null;
+  statusEl.textContent = textoLivre || (chave ? t(chave) : "");
   statusEl.className = "form-status" + (type ? " " + type : "");
 }
+
+document.addEventListener("idiomachange", () => {
+  if (statusAtual && statusAtual.chave) setStatus(statusAtual.chave, statusAtual.type);
+  if (!submitBtn.disabled) submitBtn.textContent = t("form.enviar");
+});
 
 function validate() {
   let firstInvalid = null;
@@ -32,7 +41,7 @@ form.addEventListener("input", (e) => {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!validate()) {
-    setStatus("Confira os campos destacados.", "error");
+    setStatus("form.erroCampos", "error");
     return;
   }
 
@@ -40,7 +49,7 @@ form.addEventListener("submit", async (e) => {
   data.consentimento = form.consentimento.checked;
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "Enviando...";
+  submitBtn.textContent = t("form.enviando");
   setStatus("");
 
   try {
@@ -51,16 +60,17 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(data),
     });
     const body = await res.json().catch(() => ({}));
-    if (!res.ok || !body.ok) throw new Error(body.error || "Falha no envio");
+    // O Apps Script responde erros em português; nos outros idiomas mostramos a mensagem genérica
+    if (!res.ok || !body.ok) throw new Error(body.error || "");
 
     form.reset();
-    setStatus("Recebemos seus dados! Em breve entraremos em contato.", "success");
+    setStatus("form.sucesso", "success");
   } catch (err) {
-    setStatus(err.message && err.message !== "Failed to fetch"
-      ? err.message
-      : "Não foi possível enviar agora. Tente novamente em alguns minutos.", "error");
+    const erroDoServidor = err.message && err.message !== "Failed to fetch";
+    if (erroDoServidor && idiomaAtual === "pt") setStatus(null, "error", err.message);
+    else setStatus("form.erroEnvio", "error");
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = "Enviar";
+    submitBtn.textContent = t("form.enviar");
   }
 });

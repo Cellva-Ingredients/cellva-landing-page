@@ -1,27 +1,100 @@
-# cellva-landing-page
-Landing page institucional da Cellva Ingredients
+# Cellva Landing Page
+
+Landing page da **Cellva Ingredients** para captação de leads. Visitantes conhecem o extrato de polpa de café e pedem contato pelo formulário. Cada envio chega por e-mail e fica registrado numa planilha Google.
+
+- **Site:** HTML, CSS e JavaScript puros (sem framework nem etapa de build)
+- **Formulário:** Google Apps Script (sem servidor próprio)
+- **Hospedagem:** GoDaddy
+
+## Como funciona
+
+```
+Visitante preenche o formulário (site na GoDaddy)
+                  ↓
+   Google Apps Script (conta Cellva)
+          ↓                 ↓
+ grava na planilha    envia e-mail para o comercial
+```
+
+O script valida os campos, ignora robôs (campo invisível "honeypot") e limita a 30 envios por hora.
 
 ## Estrutura
-- `frontend/`: a página (HTML, CSS, JS). É só isso que vai para a hospedagem (GoDaddy).
-- `apps-script/Code.gs`: script do Google que recebe o formulário, grava o lead numa planilha e envia por e-mail.
 
-## Configurar o formulário (uma vez)
-1. No Google Drive (conta Cellva), crie uma planilha, por exemplo "Leads landing page".
-2. Na planilha: **Extensões > Apps Script**. Apague o conteúdo do editor e cole o conteúdo de `apps-script/Code.gs`. Salve.
-3. No editor, escolha a função `testarEnvio` e clique em **Executar**. Autorize o acesso quando o Google pedir.
-   Deve chegar um e-mail de teste e aparecer uma aba "Leads" na planilha.
-4. **Implantar > Nova implantação > tipo "App da Web"**:
-   - Executar como: **Eu**
-   - Quem pode acessar: **Qualquer pessoa**
-5. Copie a URL gerada (termina em `/exec`) e cole em `frontend/assets/js/main.js`, no lugar de `COLE_AQUI_A_URL_DO_APPS_SCRIPT`.
+```
+frontend/                 → o site (é só esta pasta que vai para a hospedagem)
+├── index.html
+└── assets/
+    ├── css/style.css     → estilos e cores da marca
+    ├── js/i18n.js        → traduções (EN, PT, DE) e seletor de idioma
+    ├── js/main.js        → envio do formulário (contém a URL do Apps Script)
+    ├── img/              → logos, favicon, foto do topo e ícones
+    └── fonts/            → (opcional) arquivos da fonte Pastiche Grotesk
+apps-script/
+└── Code.gs               → código que roda no Google Apps Script
+```
 
-Se alterar o script depois: **Implantar > Gerenciar implantações > editar > Nova versão**, para manter a mesma URL.
+## Rodar localmente
+
+```bash
+cd frontend
+python3 -m http.server 8000
+```
+
+Acesse http://localhost:8000. O formulário funciona localmente e envia leads de verdade.
 
 ## Publicar na GoDaddy
-Envie o conteúdo da pasta `frontend/` (index.html e a pasta assets) para a pasta pública do site (`public_html` no cPanel).
 
-## Testar localmente
-```bash
-cd frontend && python3 -m http.server 8000
-```
-Acesse http://localhost:8000
+Envie o **conteúdo** da pasta `frontend/` (o `index.html` e a pasta `assets`) para a pasta pública do site (`public_html` no cPanel / Gerenciador de Arquivos).
+
+## Formulário (Google Apps Script)
+
+O script já está publicado. A URL fica em `frontend/assets/js/main.js` (constante `API_URL`).
+
+**Alterar o script** (por exemplo, para trocar o e-mail de destino em `EMAIL_DESTINO`):
+1. Edite o código no editor do Apps Script (planilha de leads > **Extensões > Apps Script**) e mantenha `apps-script/Code.gs` igual.
+2. **Implantar > Gerenciar implantações > ✏️ editar > Versão: Nova versão > Implantar.**
+   Assim a URL continua a mesma e o site não precisa mudar.
+
+<details>
+<summary>Configurar do zero (nova planilha ou nova conta)</summary>
+
+1. No Google Drive da Cellva, crie uma planilha (ex.: "Leads landing page").
+2. Na planilha: **Extensões > Apps Script**. Cole o conteúdo de `apps-script/Code.gs` e salve.
+3. Selecione a função `testarEnvio` e clique em **Executar**. Autorize quando o Google pedir.
+   Deve chegar um e-mail de teste e aparecer a aba "Leads".
+4. **Implantar > Nova implantação > App da Web**:
+   - Executar como: **Eu**
+   - Quem pode acessar: **Qualquer pessoa** (não "Qualquer pessoa na Cellva")
+5. Copie a URL terminada em `/exec` e coloque em `API_URL`, no `frontend/assets/js/main.js`.
+   Use o formato `https://script.google.com/macros/s/.../exec` (sem `/a/macros/cellva.com/`).
+
+</details>
+
+## Idiomas
+
+A página está em **inglês (padrão)**, **português** e **alemão**. O seletor fica no canto superior direito, e a escolha do visitante fica salva no navegador.
+
+- **Editar um texto:** altere em `frontend/assets/js/i18n.js`, nos três idiomas. No HTML, cada texto traduzível tem um atributo `data-i18n="chave"`.
+- **Novo texto na página:** coloque `data-i18n="nova.chave"` no elemento e adicione a chave em `en`, `pt` e `de`.
+- **Leads:** o segmento chega sempre em português no e-mail e na planilha, qualquer que seja o idioma do visitante.
+
+## Identidade visual
+
+Segue o [Brandcenter da Cellva](https://cba.frontify.com/d/8J4fc4g91SS2/identidade-visual). As cores estão como variáveis no início do `style.css`:
+
+| Cor | HEX | Uso no site |
+|---|---|---|
+| Verde | `#143a33` | textos, botões, contato e rodapé |
+| Amarelo | `#fac940` | botões de ação e destaques |
+| Offwhite | `#f2f2e9` | fundo |
+| Cinza Claro | `#d7dbca` | fundo de seções e bordas |
+| Musgo | `#56682b` | detalhes |
+| Azul Claro | `#227773` | hover e foco |
+
+- **Fontes:** Rethink Sans (Google Fonts) nos textos. A fonte de títulos da marca, **Pastiche Grotesk**, é licenciada. Para ativá-la, coloque `PasticheGrotesk-Bold.woff2` e `PasticheGrotesk-Medium.woff2` em `frontend/assets/fonts/`. Até lá, os títulos usam Rethink Sans.
+- **Logo:** assinatura principal (verde) no topo e secundária (amarela) no rodapé, com 160 px de largura (mínimo da marca: 150 px).
+
+## Branches
+
+- `main`: versão publicada
+- `dev`: desenvolvimento. Alterações entram em `main` por pull request.
