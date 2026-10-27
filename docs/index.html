@@ -44,7 +44,7 @@
           <h1 data-i18n="hero.title">Flavor. Function. Performance.</h1>
 
           <p class="lead" data-i18n="hero.lead">
-            We transform coffee fruit pulp, a part usually discarded during production, into a versatile extract for beverages, cocktails and desserts.
+            Transforming iconic Brazilian value chains into nutritious ingredients.
           </p>
           <div class="hero-actions">
             <a href="#contato" class="btn btn-amarelo btn-brilho" data-i18n="hero.cta">Get in touch</a>
@@ -56,44 +56,89 @@
     <!-- Produto -->
     <section id="produto" class="section">
       <div class="container">
-        <h2 class="section-title" data-i18n="produto.title">From by-product to ingredient</h2>
-        <div class="cards">
-          <article class="card">
-            <img src="assets/img/icones/gota.svg" alt="" class="card-icon">
-            <h3 data-i18n="card1.title">A different flavor</h3>
-            <p data-i18n="card1.text">Fruity, slightly sweet notes, very different from roasted coffee: a new signature for your menu.</p>
-          </article>
-          <article class="card">
-            <img src="assets/img/icones/ideia.svg" alt="" class="card-icon">
-            <h3 data-i18n="card2.title">Easy to use</h3>
-            <p data-i18n="card2.text">Works in hot and cold beverages, cocktails, syrups and desserts, without changing your preparation routine.</p>
-          </article>
-          <article class="card">
-            <img src="assets/img/icones/transformacao.svg" alt="" class="card-icon">
-            <h3 data-i18n="card3.title">Whole-fruit use</h3>
-            <p data-i18n="card3.text">Made from the pulp of the coffee fruit, a by-product of coffee production. A great story to tell your customers.</p>
-          </article>
-        </div>
+        <h2 class="section-title" data-i18n="produto.title">We are Cellva</h2>
+        <p class="produto-texto" data-i18n="produto.text1">We create natural ingredients from iconic Brazilian supply chains — connecting origin, science and industry to unlock new value from farm to market.</p>
+        <p class="produto-texto" data-i18n="produto.text2">Through proprietary technology and strategic industrial partnerships, we transform Brazilian raw materials into solutions designed for real-world application, consistency and scalability.</p>
+        <p class="produto-texto" data-i18n="produto.text3">Our approach enhances stability, functionality and sensory performance, helping to improve formulation efficiency, reduce costs and preserve flavor in real food applications.</p>
       </div>
     </section>
 
     <!-- Aplicações -->
     <section id="aplicacoes" class="section section-alt">
       <div class="container">
-        <h2 class="section-title" data-i18n="apps.title">Who it's for</h2>
-        <div class="segments">
-          <article class="segment">
-            <span class="segment-tag" data-i18n="seg1.tag">Coffee shops</span>
-            <p data-i18n="seg1.text">Signature drinks, fruity cold brews, sodas and lattes with an ingredient that speaks the language of coffee.</p>
-          </article>
-          <article class="segment">
-            <span class="segment-tag" data-i18n="seg2.tag">Mixology</span>
-            <p data-i18n="seg2.text">Syrups, infusions and drinks, with or without alcohol, that surprise guests and help tell a story at the bar.</p>
-          </article>
-          <article class="segment">
-            <span class="segment-tag" data-i18n="seg3.tag">Açaí and ice cream shops</span>
-            <p data-i18n="seg3.text">New combinations and toppings to set your cup and your menu apart.</p>
-          </article>
+        <h2 class="section-title" data-i18n="apps.title">Our products</h2>
+        <!-- Carrossel de produtos: arraste no celular ou use as setas -->
+        <div class="carrossel" aria-roledescription="carousel" aria-label="Our products" data-i18n-aria-label="apps.title">
+          <div class="carrossel-trilho">
+            <article class="produto-slide" aria-roledescription="slide">
+              <div class="produto-visual visual-foto visual-foto-cinza">
+                <img src="assets/img/produto-guarana-extrato.jpg" alt="Cellva Liquid Guaraná Extract, 1 kg bottle" data-i18n-alt="guaranaExtrato.alt" loading="lazy" width="800" height="999">
+              </div>
+              <div class="produto-info">
+                <span class="segment-tag" data-i18n="guaranaExtrato.tag">Liquid extract</span>
+                <h3 data-i18n="guaranaExtrato.name">Guaraná Extract</h3>
+                <p data-i18n="guaranaExtrato.text">Natural extract obtained from guaraná seeds (Paullinia cupana) for applications in foods, beverages, supplements and functional products.</p>
+                <ul class="produto-chips">
+                  <li data-i18n="guaranaExtrato.chip1">Gluten free</li>
+                  <li data-i18n="guaranaExtrato.chip2">Plant origin</li>
+                  <li data-i18n="guaranaExtrato.chip3">Industrial use</li>
+                </ul>
+              </div>
+            </article>
+            <article class="produto-slide" aria-roledescription="slide">
+              <div class="produto-visual visual-foto visual-foto-branco">
+                <img src="assets/img/produto-guarana-po.jpg" alt="Cellva Guaraná Powder, 20 kg bag" data-i18n-alt="guaranaPo.alt" loading="lazy" width="900" height="600">
+              </div>
+              <div class="produto-info">
+                <span class="segment-tag" data-i18n="guaranaPo.tag">Powder ingredient</span>
+                <h3 data-i18n="guaranaPo.name">Guaraná Powder</h3>
+                <p data-i18n="guaranaPo.text">Natural ingredient obtained from guaraná seeds (Paullinia cupana), with quality and traceability for the food and beverage industry, supplements and functional products.</p>
+                <ul class="produto-chips">
+                  <li data-i18n="guaranaPo.chip1">Plant-based</li>
+                  <li data-i18n="guaranaPo.chip2">No added sugar</li>
+                  <li data-i18n="guaranaPo.chip3">Natural caffeine</li>
+                  <li data-i18n="guaranaPo.chip4">Non-GMO</li>
+                </ul>
+              </div>
+            </article>
+            <article class="produto-slide" aria-roledescription="slide">
+              <div class="produto-visual visual-foto">
+                <img src="assets/img/produto-extrato-cafe.jpg" alt="Cellva Coffee Fruit Extract, 1 kg bottle" data-i18n-alt="extratoCafe.alt" loading="lazy" width="800" height="1000">
+              </div>
+              <div class="produto-info">
+                <span class="segment-tag" data-i18n="extratoCafe.tag">Liquid extract</span>
+                <h3 data-i18n="extratoCafe.name">Coffee Fruit Extract</h3>
+                <p data-i18n="extratoCafe.text">Natural liquid extract obtained from the pulp of the coffee fruit, for beverages, syrups, toppings and cocktails.</p>
+                <ul class="produto-chips">
+                  <li data-i18n="extratoCafe.chip1">Beverages</li>
+                  <li data-i18n="extratoCafe.chip2">Syrups</li>
+                  <li data-i18n="extratoCafe.chip3">Toppings</li>
+                  <li data-i18n="extratoCafe.chip4">Drinks</li>
+                </ul>
+              </div>
+            </article>
+            <article class="produto-slide" aria-roledescription="slide">
+              <div class="produto-visual visual-verde">
+                <span class="produto-visual-nome">CoffeeCoa™</span>
+              </div>
+              <div class="produto-info">
+                <span class="segment-tag" data-i18n="coffeecoa.tag">Upcycled coffee ingredient</span>
+                <h3>CoffeeCoa™</h3>
+                <p data-i18n="coffeecoa.text">Made from coffee roasting by-products with our proprietary technology that removes residual flavors. A natural alternative to replace sugars, with antioxidant and coloring functions.</p>
+                <ul class="produto-chips">
+                  <li data-i18n="coffeecoa.chip1">Sugar reduction</li>
+                  <li data-i18n="coffeecoa.chip2">Antioxidant</li>
+                  <li data-i18n="coffeecoa.chip3">Natural color</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="carrossel-controles">
+            <button type="button" class="carrossel-seta" data-dir="-1" aria-label="Previous product" data-i18n-aria-label="carrossel.anterior">&#8249;</button>
+            <div class="carrossel-pontos" role="tablist"></div>
+            <button type="button" class="carrossel-seta" data-dir="1" aria-label="Next product" data-i18n-aria-label="carrossel.proximo">&#8250;</button>
+          </div>
         </div>
       </div>
     </section>
@@ -114,8 +159,8 @@
     <section id="contato" class="section section-contact">
       <div class="container contact-inner">
         <div class="contact-text">
-          <h2 data-i18n="contact.title">Let's talk</h2>
-          <p data-i18n="contact.text">Leave your details and we'll get back to you about samples, pricing and terms.</p>
+          <h2 data-i18n="contact.title">Shall we talk?</h2>
+          <p data-i18n="contact.text">Whether it's a sample, a strategy session or a smart partnership, we'd love to hear from you.</p>
         </div>
 
         <form id="lead-form" class="form" novalidate>
@@ -189,6 +234,7 @@
   </footer>
 
   <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/carrossel.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

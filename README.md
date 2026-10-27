@@ -26,6 +26,7 @@ docs/                     → o site (pasta publicada pelo GitHub Pages)
 └── assets/
     ├── css/style.css     → estilos e cores da marca
     ├── js/i18n.js        → traduções (EN, PT, DE) e seletor de idioma
+    ├── js/carrossel.js   → carrossel da seção "Nossos produtos"
     ├── js/main.js        → envio do formulário (contém a URL do Apps Script)
     ├── img/              → logos, favicon, foto do topo e ícones
     └── fonts/            → (opcional) arquivos da fonte Pastiche Grotesk

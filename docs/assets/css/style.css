@@ -210,6 +210,8 @@ html[lang="de"] .hero h1 { font-size: clamp(1rem, 5.9vw, 3.8rem); }
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+.produto-texto { max-width: 40em; margin: 0 auto; text-align: center; font-size: 1.25rem; color: var(--muted); }
+.produto-texto + .produto-texto { margin-top: 1em; }
 .card, .segment {
   background: var(--white);
   border-radius: var(--radius);
@@ -243,6 +245,113 @@ html[lang="de"] .hero h1 { font-size: clamp(1rem, 5.9vw, 3.8rem); }
   font-weight: 700;
   font-size: 0.9rem;
 }
+
+/* Carrossel de produtos */
+.carrossel { position: relative; }
+/* Cards lado a lado: 3 no computador, 2 no tablet, 1 (com o próximo aparecendo) no celular */
+.carrossel-trilho {
+  --por-vez: 3;
+  --espaco: 24px;
+  display: flex;
+  gap: var(--espaco);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--radius);
+}
+.carrossel-trilho::-webkit-scrollbar { display: none; }
+.produto-slide {
+  flex: 0 0 calc((100% - (var(--por-vez) - 1) * var(--espaco)) / var(--por-vez));
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--radius);
+  border-top: 4px solid var(--amarelo);
+  overflow: hidden;
+}
+.produto-visual {
+  position: relative;
+  height: 240px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+/* Formas circulares inspiradas nos grafismos da marca */
+.produto-visual::before, .produto-visual::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.produto-visual::before { width: 38%; aspect-ratio: 1; right: -12%; top: -26%; background: var(--amarelo); opacity: 0.9; }
+.produto-visual::after { width: 55%; aspect-ratio: 1; left: -16%; bottom: -24%; background: rgba(242, 242, 233, 0.16); }
+.visual-verde { background: var(--verde); }
+.produto-visual-nome {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+  color: var(--offwhite);
+  font: 700 clamp(1.6rem, 2.6vw, 2rem)/1.1 var(--font-title);
+  text-align: center;
+}
+/* Fundo no mesmo cinza da foto, para a imagem se fundir ao quadro */
+.visual-foto { background: linear-gradient(90deg, #cdcdcf, #c2c2c4); }
+.visual-foto::before, .visual-foto::after { display: none; }
+.visual-foto-cinza { background: linear-gradient(90deg, #d7d8dc, #cdced3); }
+/* Foto do guaraná em pó tem fundo branco e formato horizontal: preenche o quadro */
+.visual-foto-branco { background: #f6f6f4; }
+.visual-foto-branco img { object-fit: cover; }
+.visual-foto img {
+  position: relative;
+  z-index: 1;
+  height: 240px;
+  width: 100%;
+  object-fit: contain;
+}
+.produto-info { padding: 24px 24px 28px; display: flex; flex-direction: column; flex: 1; }
+.produto-info .segment-tag { align-self: flex-start; }
+.produto-info h3 { font-size: 1.4rem; margin-bottom: 0.4em; }
+.produto-info p { margin: 0; color: var(--muted); }
+.produto-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: auto 0 0; padding: 18px 0 0; }
+.produto-chips li {
+  padding: 0.3em 0.85em;
+  border: 1.5px solid var(--cinza-claro);
+  border-radius: 999px;
+  color: var(--verde);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.carrossel-controles { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 24px; }
+.carrossel-seta {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--verde);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--verde);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.carrossel-seta:hover { background: var(--verde); color: var(--amarelo); }
+.carrossel-seta:focus-visible, .carrossel-ponto:focus-visible { outline: 3px solid var(--azul-claro); outline-offset: 2px; }
+.carrossel-pontos { display: flex; gap: 10px; }
+.carrossel-ponto {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(20, 58, 51, 0.25);
+  cursor: pointer;
+  transition: width 0.25s, background 0.25s;
+}
+.carrossel-ponto[aria-selected="true"] { width: 32px; background: var(--amarelo); }
 
 .steps {
   list-style: none;
@@ -353,11 +462,13 @@ html[lang="de"] .hero h1 { font-size: clamp(1rem, 5.9vw, 3.8rem); }
 
 /* Responsivo */
 @media (max-width: 900px) {
+  .carrossel-trilho { --por-vez: 2; }
   .contact-inner { grid-template-columns: 1fr; }
   .cards, .segments, .steps { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
+  .carrossel-trilho { --por-vez: 1.15; --espaco: 16px; }
   .nav a:not(.btn) { display: none; }
   .header-right { gap: 0.75rem; }
   .hero { padding: 48px 0 64px; }
