@@ -75,6 +75,24 @@ O script já está publicado. A URL fica em `docs/assets/js/main.js` (constante 
 
 </details>
 
+## Campanha de e-mail (teste A/B)
+
+Os botões dos e-mails apontam para o formulário com dois parâmetros:
+
+| Parâmetro | Valores | O que faz |
+|---|---|---|
+| `v` | `A` ou `B` | versão do e-mail; vai no campo oculto `variante` |
+| `r` | `dossier`, `meeting` ou `samples` | pré-seleciona o campo "I'd like to…" (`interesse`) |
+
+```
+https://register.cellva.com/?v=A&r=dossier#contato
+https://register.cellva.com/?v=A&r=meeting#contato
+https://register.cellva.com/?v=B&r=dossier#contato
+https://register.cellva.com/?v=B&r=meeting#contato
+```
+
+Na planilha, as colunas **Interesse** e **Variante (A/B)** mostram qual trilha converteu. Valores fora da lista são ignorados.
+
 ## Idiomas
 
 A página está em **inglês (padrão)**, **português** e **alemão**. O seletor fica no canto superior direito, e a escolha do visitante fica salva no navegador.

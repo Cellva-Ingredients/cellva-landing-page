@@ -9,10 +9,14 @@ const CAMPOS = [
   { key: "nome", label: "Nome", required: true, max: 120 },
   { key: "empresa", label: "Empresa", required: true, max: 160 },
   { key: "email", label: "E-mail", required: true, max: 160 },
-  { key: "telefone", label: "WhatsApp / telefone", required: true, max: 30 },
+  { key: "telefone", label: "WhatsApp / telefone", required: false, max: 30 },
   { key: "segmento", label: "Segmento", required: true, max: 80 },
   { key: "cidade", label: "Cidade / UF", required: false, max: 80 },
   { key: "mensagem", label: "Mensagem", required: false, max: 2000 },
+  // Campos da campanha de e-mail (ficam no fim para não desalinhar as colunas antigas da planilha)
+  { key: "interesse", label: "Interesse", required: true, max: 80 },
+  { key: "variante", label: "Variante (A/B)", required: false, max: 5 },
+  { key: "cargo", label: "Cargo / setor", required: false, max: 80 },
 ];
 
 function doPost(e) {
@@ -34,6 +38,7 @@ function doPost(e) {
     dados[c.key] = valor;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email)) return resposta({ error: "E-mail inválido." });
+  if (dados.variante && !/^[AB]$/.test(dados.variante)) dados.variante = "";
   if (body.consentimento !== true) return resposta({ error: "É preciso autorizar o contato." });
 
   if (!dentroDoLimite()) return resposta({ error: "Muitas tentativas. Tente novamente mais tarde." });
@@ -60,11 +65,15 @@ function dentroDoLimite() {
 
 function salvarNaPlanilha(dados, agora) {
   const planilha = SpreadsheetApp.getActiveSpreadsheet();
+  const cabecalho = ["Data"].concat(CAMPOS.map((c) => c.label));
   let aba = planilha.getSheetByName(NOME_ABA);
   if (!aba) {
     aba = planilha.insertSheet(NOME_ABA);
-    aba.appendRow(["Data"].concat(CAMPOS.map((c) => c.label)));
+    aba.appendRow(cabecalho);
     aba.setFrozenRows(1);
+  } else if (aba.getLastColumn() < cabecalho.length) {
+    // Planilha criada antes dos campos novos: completa o cabeçalho com as colunas que faltam
+    aba.getRange(1, 1, 1, cabecalho.length).setValues([cabecalho]);
   }
   // Prefixo "'" impede que textos começando com = + - @ virem fórmulas
   const linha = CAMPOS.map((c) => (/^[=+\-@]/.test(dados[c.key]) ? "'" : "") + dados[c.key]);
@@ -72,7 +81,12 @@ function salvarNaPlanilha(dados, agora) {
 }
 
 function enviarEmail(dados, agora) {
-  const linhas = CAMPOS.filter((c) => dados[c.key]);
+  // No e-mail, interesse e variante aparecem primeiro, para a triagem ser rápida
+  const ordem = ["interesse", "variante"];
+  const linhas = CAMPOS.filter((c) => dados[c.key]).sort((a, b) => {
+    const ia = ordem.indexOf(a.key), ib = ordem.indexOf(b.key);
+    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+  });
   const html =
     '<h2 style="font-family:sans-serif">Novo contato pela landing page</h2>' +
     '<table style="font-family:sans-serif;border-collapse:collapse">' +
@@ -91,7 +105,7 @@ function enviarEmail(dados, agora) {
     to: EMAIL_DESTINO,
     replyTo: dados.email,
     name: "Site Cellva",
-    subject: ("Novo lead: " + dados.empresa + " (" + dados.segmento + ")").replace(/[\r\n]+/g, " "),
+    subject: ("Novo lead: " + dados.empresa + " — " + dados.interesse + (dados.variante ? " [" + dados.variante + "]" : "")).replace(/[\r\n]+/g, " "),
     body: linhas.map((c) => c.label + ": " + dados[c.key]).join("\n"),
     htmlBody: html,
   });
@@ -108,7 +122,7 @@ function resposta(obj) {
 // Rode esta função uma vez pelo editor para autorizar o envio de e-mail e o acesso à planilha.
 function testarEnvio() {
   const agora = new Date();
-  const teste = { nome: "Teste", empresa: "Cellva (teste)", email: EMAIL_DESTINO, telefone: "-", segmento: "Teste", cidade: "", mensagem: "Mensagem de teste." };
+  const teste = { nome: "Teste", empresa: "Cellva (teste)", email: EMAIL_DESTINO, telefone: "", segmento: "Teste", cidade: "", mensagem: "Mensagem de teste.", interesse: "Dossiê técnico", variante: "A", cargo: "Marketing" };
   salvarNaPlanilha(teste, agora);
   enviarEmail(teste, agora);
 }

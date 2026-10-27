@@ -7,6 +7,21 @@ const form = document.getElementById("lead-form");
 const statusEl = form.querySelector(".form-status");
 const submitBtn = form.querySelector('button[type="submit"]');
 
+// Rastreamento da campanha de e-mail:
+//   ?v=A ou ?v=B          → versão do e-mail, enviada no campo oculto "variante"
+//   ?r=dossier|meeting|samples → pré-seleciona o campo "I'd like to…"
+// Usa defaultValue/defaultSelected para os valores sobreviverem ao form.reset() após um envio.
+(function lerParametrosDaCampanha() {
+  const params = new URLSearchParams(window.location.search);
+
+  const variante = (params.get("v") || "").trim().toUpperCase();
+  if (/^[AB]$/.test(variante)) form.variante.defaultValue = variante;
+
+  const r = (params.get("r") || "").trim().toLowerCase();
+  const opcao = r && form.interesse.querySelector('option[data-r="' + CSS.escape(r) + '"]');
+  if (opcao) opcao.defaultSelected = opcao.selected = true;
+})();
+
 // Guarda a chave da mensagem para retraduzir se o visitante trocar de idioma
 let statusAtual = null;
 
